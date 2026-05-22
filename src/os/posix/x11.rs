@@ -849,10 +849,10 @@ impl Window {
             Scale::X16 => 16,
             Scale::X32 => 32,
             Scale::FitScreen => {
-                let mut scale = 1;
+                let mut scale = 1usize;
 
                 loop {
-                    let next_scale = scale * 2;
+                    let next_scale = scale + 1;
                     let w = width * next_scale;
                     let h = height * next_scale;
 
@@ -863,11 +863,7 @@ impl Window {
                     scale = next_scale;
                 }
 
-                if scale >= 32 {
-                    32
-                } else {
-                    scale
-                }
+                scale
             }
         }
     }

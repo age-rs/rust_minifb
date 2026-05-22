@@ -1040,17 +1040,18 @@ impl Window {
                 let mut scale = 1i32;
 
                 loop {
-                    let w = width as i32 * (scale + 1);
-                    let h = height as i32 * (scale + 1);
+                    let next_scale = scale + 1;
+                    let w = width as i32 * next_scale;
+                    let h = height as i32 * next_scale;
 
                     if w > screen_x || h > screen_y {
                         break;
                     }
 
-                    scale *= 2;
+                    scale = next_scale;
                 }
 
-                scale
+                std::cmp::max(1, scale - 1) //reduce slightly so we don't go over the taskbar
             }
         };
 
